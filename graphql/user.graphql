@@ -1,0 +1,27 @@
+scalar Upload
+  @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Upload")
+
+extend type Query {
+    users: [User!]! @paginate
+    user(id: ID @eq): User @find
+
+}
+
+extend type Mutation {
+  createUser(
+    name: String!,
+     email:String! @rules(apply: ["email", "unique:users"]), 
+     password:String!): User! @create
+  updateUser(id:ID, name:String, email:String): User! @update
+
+  uploadAvatar(image: Upload!): String
+}
+
+
+type User {
+  id: ID,
+  name: String,
+  email: String
+  email_verified_at: String
+  posts: [Post]! @hasMany
+}
