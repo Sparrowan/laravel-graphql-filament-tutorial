@@ -14,7 +14,7 @@ extend type Mutation {
      password:String!): User! @create
   updateUser(id:ID, name:String, email:String): User! @update
 
-  uploadAvatar(image: Upload!): String
+  uploadAvatar(image: Upload!, id:ID!): User!
 }
 
 
@@ -23,5 +23,6 @@ type User {
   name: String,
   email: String
   email_verified_at: String
+  avatar: String
   posts: [Post]! @hasMany
 }
